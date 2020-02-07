@@ -9,5 +9,6 @@
     <string name="default_last_name">Dupont</string>
     <string name="default_mail">name@example.com</string>
     <string name="default_city">Plouplou</string>
+    <string name="dismiss">Vas-y va-t-en</string>
 
 </resources>

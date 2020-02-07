@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
 
 public class SecondaryActivity extends AppCompatActivity  {
@@ -60,10 +59,19 @@ public class SecondaryActivity extends AppCompatActivity  {
         String textToShow = firstname.getText().toString();
 
         Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
-        Snackbar.make(v, textToShow, Snackbar.LENGTH_LONG).show();
+
+        final Snackbar sb = Snackbar.make(v, textToShow, Snackbar.LENGTH_LONG);
+
+        sb.show();
+        sb.setAction(R.string.dismiss, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Respond to the click, such as by undoing the modification that caused
+                        // this message to be displayed
+                    }
+                });
 
         Log.i("Message", "Button method "+textToShow);
-
 
     }
 
