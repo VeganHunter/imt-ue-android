@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyFirstApplication</string>
+    <string name="first_name">Prénom</string>
+    <string name="last_name">Nom de famille</string>
+    <string name="mail_address">Adresse mail</string>
+    <string name="city">Ville</string>
+    <string name="send">Envoyer</string>
+    <string name="default_first_name">Jean</string>
+    <string name="default_last_name">Dupont</string>
+    <string name="default_mail">name@example.com</string>
+    <string name="default_city">Plouplou</string>
+
+</resources>
