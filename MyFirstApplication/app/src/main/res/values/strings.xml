@@ -4,6 +4,7 @@
     <string name="last_name">Nom de famille</string>
     <string name="mail_address">Adresse mail</string>
     <string name="city">Ville</string>
+    <string name="department">Département</string>
     <string name="send">Envoyer</string>
     <string name="default_first_name">Jean</string>
     <string name="default_last_name">Dupont</string>

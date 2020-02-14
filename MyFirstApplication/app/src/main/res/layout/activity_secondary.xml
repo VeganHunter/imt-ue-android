@@ -66,6 +66,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
 
+                <TextView
+                    android:id="@+id/textViewCity2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/department"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.492"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
                 <Button
                     android:id="@+id/buttonSend"
                     android:layout_width="wrap_content"
@@ -134,11 +145,11 @@
                     android:id="@+id/table_layout"
                     android:layout_width="336dp"
                     android:layout_height="125dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.493"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
                 <Button
                     android:id="@+id/phone_button"
@@ -152,6 +163,17 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/buttonSend"
                     app:layout_constraintTop_toBottomOf="@+id/table_layout" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="282dp"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/departements"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCity2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
