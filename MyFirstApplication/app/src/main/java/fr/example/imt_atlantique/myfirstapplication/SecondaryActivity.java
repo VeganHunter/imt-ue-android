@@ -3,6 +3,7 @@ package fr.example.imt_atlantique.myfirstapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -25,6 +25,8 @@ public class SecondaryActivity extends AppCompatActivity  {
     private EditText city;
     private TableLayout table;
 
+    private String firstName_str;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,6 +39,11 @@ public class SecondaryActivity extends AppCompatActivity  {
         mail = findViewById(R.id.editTextMail);
         city = findViewById(R.id.editTextCity);
         table = findViewById(R.id.table_layout);
+
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+
+        firstName_str = prefs.getString("firstName", "");
+        firstname.setText(firstName_str);
 
     }
 
@@ -68,6 +75,10 @@ public class SecondaryActivity extends AppCompatActivity  {
     protected void onStop(){
         super.onStop();
         Log.i("Lifecycle", "onStop method");
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("firstName", firstName_str);
+        editor.apply();
     }
 
     @Override
@@ -133,6 +144,18 @@ public class SecondaryActivity extends AppCompatActivity  {
         newRow.addView(removeButton);
         table.addView(newRow);
 
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        outState.putString("firstName", firstName_str);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        firstName_str = savedInstanceState.getString("firstName");
+        firstname.setText(firstName_str);
     }
 
 }
