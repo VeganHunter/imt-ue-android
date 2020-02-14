@@ -15,8 +15,9 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_layout"
                 android:layout_width="match_parent"
-                android:layout_height="574dp"
+                android:layout_height="724dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent">
@@ -69,15 +70,14 @@
                     android:id="@+id/buttonSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="155dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginBottom="32dp"
-                    android:text="@string/send"
                     android:onClick="validateAction"
+                    android:text="@string/send"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
                     android:id="@+id/editTextLastName"
@@ -129,6 +129,29 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewMail" />
+
+                <TableLayout
+                    android:id="@+id/table_layout"
+                    android:layout_width="336dp"
+                    android:layout_height="125dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
+                <Button
+                    android:id="@+id/phone_button"
+                    android:layout_width="33dp"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="addPhoneNumber"
+                    android:text="@string/add_phone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonSend"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSend"
+                    app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

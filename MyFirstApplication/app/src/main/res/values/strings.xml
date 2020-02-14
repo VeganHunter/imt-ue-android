@@ -10,5 +10,7 @@
     <string name="default_mail">name@example.com</string>
     <string name="default_city">Plouplou</string>
     <string name="dismiss">Vas-y va-t-en</string>
+    <string name="reset_action">Je reset</string>
+    <string name="add_phone">+</string>
 
 </resources>

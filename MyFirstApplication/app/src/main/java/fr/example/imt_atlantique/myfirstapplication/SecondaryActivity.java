@@ -1,10 +1,19 @@
 package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -72,6 +81,52 @@ public class SecondaryActivity extends AppCompatActivity  {
                 });
 
         Log.i("Message", "Button method "+textToShow);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean resetAction(MenuItem item) {
+
+        EditText firstname = findViewById(R.id.editTextfirstName);
+        EditText lastname = findViewById(R.id.editTextLastName);
+        EditText mail = findViewById(R.id.editTextMail);
+        EditText city = findViewById(R.id.editTextCity);
+
+        firstname.setText(null);
+        lastname.setText(null);
+        mail.setText(null);
+        city.setText(null);
+
+        return true;
+
+    }
+
+    public void addPhoneNumber (View v) {
+
+        TableLayout table = findViewById(R.id.table_layout);
+
+        EditText lEditText = new EditText(this);
+        lEditText.setHint("Phone Number");
+
+        Button removeButton = new Button(this);
+        removeButton.setText("X");
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((ViewGroup)v.getParent().getParent()).removeView((ViewGroup)v.getParent());
+            }
+        });
+
+        TableRow newRow = new TableRow(this);
+        newRow.addView(lEditText);
+        newRow.addView(removeButton);
+        table.addView(newRow);
+
 
     }
 
