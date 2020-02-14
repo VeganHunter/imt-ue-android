@@ -19,11 +19,25 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class SecondaryActivity extends AppCompatActivity  {
 
+    private EditText firstname;
+    private EditText lastname;
+    private EditText mail;
+    private EditText city;
+    private TableLayout table;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
         Log.i("Lifecycle", "onCreate method");
+
+        firstname = findViewById(R.id.editTextfirstName);
+        lastname = findViewById(R.id.editTextLastName);
+        mail = findViewById(R.id.editTextMail);
+        city = findViewById(R.id.editTextCity);
+        table = findViewById(R.id.table_layout);
+
     }
 
     @Override
@@ -64,7 +78,6 @@ public class SecondaryActivity extends AppCompatActivity  {
 
     public void validateAction (View v) {
 
-        EditText firstname = findViewById(R.id.editTextfirstName);
         String textToShow = firstname.getText().toString();
 
         Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
@@ -92,11 +105,6 @@ public class SecondaryActivity extends AppCompatActivity  {
 
     public boolean resetAction(MenuItem item) {
 
-        EditText firstname = findViewById(R.id.editTextfirstName);
-        EditText lastname = findViewById(R.id.editTextLastName);
-        EditText mail = findViewById(R.id.editTextMail);
-        EditText city = findViewById(R.id.editTextCity);
-
         firstname.setText(null);
         lastname.setText(null);
         mail.setText(null);
@@ -107,8 +115,6 @@ public class SecondaryActivity extends AppCompatActivity  {
     }
 
     public void addPhoneNumber (View v) {
-
-        TableLayout table = findViewById(R.id.table_layout);
 
         EditText lEditText = new EditText(this);
         lEditText.setHint("Phone Number");
@@ -126,7 +132,6 @@ public class SecondaryActivity extends AppCompatActivity  {
         newRow.addView(lEditText);
         newRow.addView(removeButton);
         table.addView(newRow);
-
 
     }
 
