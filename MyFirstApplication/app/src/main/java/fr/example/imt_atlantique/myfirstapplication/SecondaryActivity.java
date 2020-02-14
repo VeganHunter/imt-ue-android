@@ -25,7 +25,7 @@ public class SecondaryActivity extends AppCompatActivity  {
     private EditText city;
     private TableLayout table;
 
-    private String firstName_str;
+    //private String firstName_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,10 @@ public class SecondaryActivity extends AppCompatActivity  {
 
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
 
-        firstName_str = prefs.getString("firstName", "");
-        firstname.setText(firstName_str);
+        //firstName_str = prefs.getString("firstName", "");
+       // Log.i("hello", "voici la string : "+firstName_str);
+        //firstname.setText(firstName_str);
+        //firstname.setText(prefs.getString("firstName", ""));
 
     }
 
@@ -77,7 +79,8 @@ public class SecondaryActivity extends AppCompatActivity  {
         Log.i("Lifecycle", "onStop method");
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("firstName", firstName_str);
+        //editor.putString("firstName", firstName_str);
+        editor.putString("firstName", firstname.getText().toString());
         editor.apply();
     }
 
@@ -149,13 +152,19 @@ public class SecondaryActivity extends AppCompatActivity  {
     public void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        outState.putString("firstName", firstName_str);
+        //firstName_str = firstname.getText().toString();
+        //Log.i("message", ""+firstName_str);
+        outState.putString("firstName", firstname.getText().toString());
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
-        firstName_str = savedInstanceState.getString("firstName");
-        firstname.setText(firstName_str);
+        //firstName_str = savedInstanceState.getString("firstName");
+        //firstname.setText(firstName_str);
+
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+        firstname.setText(prefs.getString("firstName", ""));
+
     }
 
 }
