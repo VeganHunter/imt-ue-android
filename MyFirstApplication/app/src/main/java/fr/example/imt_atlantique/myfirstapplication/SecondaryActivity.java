@@ -1,7 +1,6 @@
 package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
