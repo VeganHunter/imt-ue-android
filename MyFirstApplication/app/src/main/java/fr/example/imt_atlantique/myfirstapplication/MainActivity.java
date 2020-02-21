@@ -54,11 +54,20 @@ public class MainActivity extends AppCompatActivity  {
         String savedVille = prefs.getString("ville", "");
         cityField.setText(savedVille);
 
-        // TODO restore department and phone numbers
+        int numdep = prefs.getInt("numDep", 0);
+        departmentField.setSelection(numdep);
 
+        int nbPhones = prefs.getInt("nbPhones",0);
+        for (int i=0; i<nbPhones; i++) {
+            String phone = prefs.getString("phone"+i, "");
+            addPhoneNumber(table);
+            TableRow r = (TableRow)table.getChildAt(i);
+            EditText t = (EditText)r.getChildAt(0);
+            t.setText(phone);
+        }
     }
 
-    @Override
+    @Override                              
     protected void onStart() {
         super.onStart();
         Log.i("Lifecycle", "onStart method");
@@ -102,7 +111,18 @@ public class MainActivity extends AppCompatActivity  {
         String ville = cityField.getText().toString();
         editor.putString("ville", ville);
 
-        // TODO save department and phone numbers
+        int numdep = departmentField.getSelectedItemPosition();
+        editor.putInt("numDep", numdep);
+
+        int nbPhones = table.getChildCount();
+        editor.putInt("nbPhones", nbPhones);
+
+        for (int i=0; i<nbPhones; i++) {
+            TableRow r = (TableRow)table.getChildAt(i);
+            EditText t = (EditText)r.getChildAt(0);
+            editor.putString("phone"+i, t.getText().toString());
+            Log.i("phone number", " : " + t.getText().toString());
+        }
 
         editor.apply();
 
