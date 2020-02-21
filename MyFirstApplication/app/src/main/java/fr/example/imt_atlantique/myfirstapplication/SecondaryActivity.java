@@ -38,10 +38,20 @@ public class SecondaryActivity extends AppCompatActivity  {
         table = findViewById(R.id.table_layout);
 
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+
         String savedPrenom = prefs.getString("firstName", "");
         firstNameField.setText(savedPrenom);
 
-        Log.i("PRENOM QUON CHOPPE", "."+savedPrenom);
+        String savedNom = prefs.getString("lastName", "");
+        lastNameField.setText(savedNom);
+
+        String saveMail = prefs.getString("mail", "");
+        mailField.setText(saveMail);
+
+        String savedVille = prefs.getString("ville", "");
+        cityField.setText(savedVille);
+
+        // TODO restore department and phone numbers
 
 
     }
@@ -80,9 +90,19 @@ public class SecondaryActivity extends AppCompatActivity  {
 
         String prenom = firstNameField.getText().toString();
         editor.putString("firstName", prenom);
-        editor.apply();
 
-        Log.i("PRENOM EN TRAIN DETRE SAUVEGARDE", ""+prenom);
+        String nom = lastNameField.getText().toString();
+        editor.putString("lastName", nom);
+
+        String mail = mailField.getText().toString();
+        editor.putString("mail", mail);
+
+        String ville = cityField.getText().toString();
+        editor.putString("ville", ville);
+
+        // TODO save department and phone numbers
+
+        editor.apply();
 
     }
 
