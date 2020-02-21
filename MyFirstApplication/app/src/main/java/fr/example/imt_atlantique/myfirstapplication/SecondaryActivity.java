@@ -2,7 +2,6 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,13 +17,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class SecondaryActivity extends AppCompatActivity  {
 
-    private EditText firstname;
-    private EditText lastname;
-    private EditText mail;
-    private EditText city;
+    private EditText firstNameField;
+    private EditText lastNameField;
+    private EditText mailField;
+    private EditText cityField;
     private TableLayout table;
-
-    //private String firstName_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +30,11 @@ public class SecondaryActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_secondary);
         Log.i("Lifecycle", "onCreate method");
 
-        firstname = findViewById(R.id.editTextfirstName);
-        lastname = findViewById(R.id.editTextLastName);
-        mail = findViewById(R.id.editTextMail);
-        city = findViewById(R.id.editTextCity);
+        firstNameField = findViewById(R.id.editTextfirstName);
+        lastNameField = findViewById(R.id.editTextLastName);
+        mailField = findViewById(R.id.editTextMail);
+        cityField = findViewById(R.id.editTextCity);
         table = findViewById(R.id.table_layout);
-
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-
-        //firstName_str = prefs.getString("firstName", "");
-       // Log.i("hello", "voici la string : "+firstName_str);
-        //firstname.setText(firstName_str);
-        //firstname.setText(prefs.getString("firstName", ""));
 
     }
 
@@ -76,11 +66,6 @@ public class SecondaryActivity extends AppCompatActivity  {
     protected void onStop(){
         super.onStop();
         Log.i("Lifecycle", "onStop method");
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        //editor.putString("firstName", firstName_str);
-        editor.putString("firstName", firstname.getText().toString());
-        editor.apply();
     }
 
     @Override
@@ -91,7 +76,7 @@ public class SecondaryActivity extends AppCompatActivity  {
 
     public void validateAction (View v) {
 
-        String textToShow = firstname.getText().toString();
+        String textToShow = firstNameField.getText().toString();
 
         Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
 
@@ -118,10 +103,10 @@ public class SecondaryActivity extends AppCompatActivity  {
 
     public boolean resetAction(MenuItem item) {
 
-        firstname.setText(null);
-        lastname.setText(null);
-        mail.setText(null);
-        city.setText(null);
+        firstNameField.setText(null);
+        lastNameField.setText(null);
+        mailField.setText(null);
+        cityField.setText(null);
 
         return true;
 
@@ -151,18 +136,38 @@ public class SecondaryActivity extends AppCompatActivity  {
     public void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        //firstName_str = firstname.getText().toString();
-        //Log.i("message", ""+firstName_str);
-        outState.putString("firstName", firstname.getText().toString());
+
+        String prenom = firstNameField.getText().toString();
+        outState.putString("prenom", prenom);
+
+        String nom = lastNameField.getText().toString();
+        outState.putString("nom", nom);
+
+        String mail = mailField.getText().toString();
+        outState.putString("mailField", mail);
+
+        String ville = cityField.getText().toString();
+        outState.putString("ville", ville);
+
+        // TODO : departement
+        // TODO : numéro de téléphone
+
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
-        //firstName_str = savedInstanceState.getString("firstName");
-        //firstname.setText(firstName_str);
+        String restoredPrenom = savedInstanceState.getString("prenom");
+        firstNameField.setText(restoredPrenom);
 
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-        firstname.setText(prefs.getString("firstName", ""));
+        String restoredNom = savedInstanceState.getString("nom");
+        lastNameField.setText(restoredNom);
+
+        String restoredMail = savedInstanceState.getString("mailField");
+        mailField.setText(restoredMail);
+
+        String restoredVille = savedInstanceState.getString("ville");
+        cityField.setText(restoredVille);
+
 
     }
 
