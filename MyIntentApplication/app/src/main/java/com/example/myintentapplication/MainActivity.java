@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         questionfield = findViewById(R.id.questionText);
-        if(getIntent().getStringExtra("answer")!=null){
+        if(getIntent().getStringExtra("answer") != null){
             String ans = getIntent().getStringExtra("answer");
         }
     }
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 4 && resultCode == 1){
+        if(requestCode == 4 && resultCode == 1) {
             View v = (View) questionfield.getParent();
             final Snackbar sb = Snackbar.make(v, data.getStringExtra("answer"), Snackbar.LENGTH_LONG);
 
