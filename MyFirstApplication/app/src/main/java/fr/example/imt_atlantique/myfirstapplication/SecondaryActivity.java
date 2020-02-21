@@ -2,6 +2,7 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,13 @@ public class SecondaryActivity extends AppCompatActivity  {
         cityField = findViewById(R.id.editTextCity);
         table = findViewById(R.id.table_layout);
 
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+        String savedPrenom = prefs.getString("firstName", "");
+        firstNameField.setText(savedPrenom);
+
+        Log.i("PRENOM QUON CHOPPE", "."+savedPrenom);
+
+
     }
 
     @Override
@@ -66,6 +74,16 @@ public class SecondaryActivity extends AppCompatActivity  {
     protected void onStop(){
         super.onStop();
         Log.i("Lifecycle", "onStop method");
+
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        String prenom = firstNameField.getText().toString();
+        editor.putString("firstName", prenom);
+        editor.apply();
+
+        Log.i("PRENOM EN TRAIN DETRE SAUVEGARDE", ""+prenom);
+
     }
 
     @Override
