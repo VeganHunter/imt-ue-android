@@ -11,17 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
+import static android.text.InputType.TYPE_CLASS_PHONE;
+
 public class SecondaryActivity extends AppCompatActivity  {
 
     private EditText firstNameField;
     private EditText lastNameField;
-    private EditText mailField;
+    private EditText birthdateField;
     private EditText cityField;
+    private Spinner departmentField;
     private TableLayout table;
 
     @Override
@@ -33,8 +37,9 @@ public class SecondaryActivity extends AppCompatActivity  {
 
         firstNameField = findViewById(R.id.editTextfirstName);
         lastNameField = findViewById(R.id.editTextLastName);
-        mailField = findViewById(R.id.editTextMail);
+        birthdateField = findViewById(R.id.editBirthdate);
         cityField = findViewById(R.id.editTextCity);
+        departmentField = findViewById(R.id.spinner);
         table = findViewById(R.id.table_layout);
 
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -45,14 +50,13 @@ public class SecondaryActivity extends AppCompatActivity  {
         String savedNom = prefs.getString("lastName", "");
         lastNameField.setText(savedNom);
 
-        String saveMail = prefs.getString("mail", "");
-        mailField.setText(saveMail);
+        String saveBirthdate = prefs.getString("birthdate", "");
+        birthdateField.setText(saveBirthdate);
 
         String savedVille = prefs.getString("ville", "");
         cityField.setText(savedVille);
 
         // TODO restore department and phone numbers
-
 
     }
 
@@ -94,8 +98,8 @@ public class SecondaryActivity extends AppCompatActivity  {
         String nom = lastNameField.getText().toString();
         editor.putString("lastName", nom);
 
-        String mail = mailField.getText().toString();
-        editor.putString("mail", mail);
+        String birthdate = birthdateField.getText().toString();
+        editor.putString("birthdate", birthdate);
 
         String ville = cityField.getText().toString();
         editor.putString("ville", ville);
@@ -143,8 +147,10 @@ public class SecondaryActivity extends AppCompatActivity  {
 
         firstNameField.setText(null);
         lastNameField.setText(null);
-        mailField.setText(null);
+        birthdateField.setText(null);
         cityField.setText(null);
+        departmentField.setSelection(0);
+        table.removeAllViews();
 
         return true;
 
@@ -153,6 +159,7 @@ public class SecondaryActivity extends AppCompatActivity  {
     public void addPhoneNumber (View v) {
 
         EditText lEditText = new EditText(this);
+        lEditText.setInputType(TYPE_CLASS_PHONE);
         lEditText.setHint("Phone Number");
 
         Button removeButton = new Button(this);
@@ -181,8 +188,8 @@ public class SecondaryActivity extends AppCompatActivity  {
         String nom = lastNameField.getText().toString();
         outState.putString("nom", nom);
 
-        String mail = mailField.getText().toString();
-        outState.putString("mailField", mail);
+        String birthdate = birthdateField.getText().toString();
+        outState.putString("birthdate", birthdate);
 
         String ville = cityField.getText().toString();
         outState.putString("ville", ville);
@@ -200,8 +207,8 @@ public class SecondaryActivity extends AppCompatActivity  {
         String restoredNom = savedInstanceState.getString("nom");
         lastNameField.setText(restoredNom);
 
-        String restoredMail = savedInstanceState.getString("mailField");
-        mailField.setText(restoredMail);
+        String restoredBirthdate = savedInstanceState.getString("birthdate");
+        birthdateField.setText(restoredBirthdate);
 
         String restoredVille = savedInstanceState.getString("ville");
         cityField.setText(restoredVille);
