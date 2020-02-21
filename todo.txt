@@ -1,3 +1,2 @@
 scroll view
 sauvegarder département et phone
-reset doit reset téléphone et département
