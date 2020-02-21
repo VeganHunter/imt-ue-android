@@ -1,0 +1,5 @@
+remplacer mail par date de naissance
+clavier spécial pour numéros
+scroll view
+sauvegarder département et phone
+reset doit reset téléphone et département
