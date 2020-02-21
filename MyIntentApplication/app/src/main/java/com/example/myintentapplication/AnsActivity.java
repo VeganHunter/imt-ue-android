@@ -26,10 +26,11 @@ public class AnsActivity extends AppCompatActivity {
 
     }
 
-    public void sendQuestion(View v){
+    public void sendAnswer(View v){
         Intent intent =  new Intent(this, MainActivity.class);
         String ans = answerfield.getText().toString();
         intent.putExtra("answer", ans);
-        startActivity(intent);
+        setResult(1, intent);
+        finish();
     }
 }

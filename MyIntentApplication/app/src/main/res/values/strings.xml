@@ -5,5 +5,7 @@
     <string name="sendques">Demander</string>
     <string name="sendans">Répondre</string>
     <string name="answer">Réponse</string>
+    <string name="dismiss">Fermer</string>
+
 
 </resources>
