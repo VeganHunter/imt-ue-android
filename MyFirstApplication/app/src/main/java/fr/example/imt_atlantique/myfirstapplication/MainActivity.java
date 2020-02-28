@@ -1,7 +1,10 @@
 package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
+
 import static android.text.InputType.TYPE_CLASS_PHONE;
 
 public class MainActivity extends AppCompatActivity  {
@@ -121,7 +125,6 @@ public class MainActivity extends AppCompatActivity  {
             TableRow r = (TableRow)table.getChildAt(i);
             EditText t = (EditText)r.getChildAt(0);
             editor.putString("phone"+i, t.getText().toString());
-            Log.i("phone number", " : " + t.getText().toString());
         }
 
         editor.apply();
@@ -174,7 +177,64 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    public void addPhoneNumber (View v) {
+    public boolean wikipedia_search(MenuItem item) {
+
+        boolean success = true;
+
+        String city = cityField.getText().toString();
+
+        if (city.equals("")) {
+            success = false;
+        }
+
+        else {
+
+            String url = "http://fr.wikipedia.org/?search=" + city;
+            Uri uri = Uri.parse(url);
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+            // Verify that the intent will resolve to an activity
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+
+        }
+
+        return success;
+
+    }
+
+    public boolean share(MenuItem item) {
+
+        boolean success = true;
+
+
+        String city = cityField.getText().toString();
+
+        if (city.equals("")) {
+            success = false;
+        }
+
+        else {
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+
+            intent.putExtra(Intent.EXTRA_TEXT, city);
+            intent.setType("text/plain");
+
+            // Verify that the intent will resolve to an activity
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+
+        }
+
+        return success;
+
+    }
+
+        public void addPhoneNumber (View v) {
 
         EditText lEditText = new EditText(this);
         lEditText.setInputType(TYPE_CLASS_PHONE);
@@ -212,8 +272,7 @@ public class MainActivity extends AppCompatActivity  {
         String ville = cityField.getText().toString();
         outState.putString("ville", ville);
 
-        // TODO : departement
-        // TODO : numéro de téléphone
+        // phones and birthdate are not handled, but they're saved in prefs
 
     }
 

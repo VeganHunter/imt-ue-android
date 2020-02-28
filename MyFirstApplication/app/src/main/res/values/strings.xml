@@ -13,5 +13,6 @@
     <string name="dismiss">Vas-y va-t-en</string>
     <string name="reset_action">Je reset</string>
     <string name="add_phone">+</string>
-
+    <string name="rechercheWikipedia">Recherche Wikipédia</string>
+    <string name="share">Partager ville</string>
 </resources>
