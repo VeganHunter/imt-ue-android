@@ -7,8 +7,6 @@ import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Calendar;
-
 public class DateActivity extends AppCompatActivity {
 
     private DatePicker datePicker;

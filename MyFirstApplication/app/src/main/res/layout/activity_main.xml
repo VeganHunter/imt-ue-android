@@ -22,6 +22,30 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent">
 
+                <ImageButton
+                    android:id="@+id/editFirstName"
+                    android:layout_width="46dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="editFirstName"
+                    app:layout_constraintStart_toEndOf="@+id/editTextfirstName"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewfirstName"
+                    app:srcCompat="@android:drawable/ic_menu_edit"/>
+
+
+
+                <ImageButton
+                    android:id="@+id/viewLastName"
+                    android:layout_width="46dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="viewLastName"
+                    app:layout_constraintStart_toEndOf="@+id/editTextLastName"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewlastName"
+                    app:srcCompat="@android:drawable/ic_menu_info_details"/>
+
                 <TextView
                     android:id="@+id/textViewlastName"
                     android:layout_width="wrap_content"
@@ -156,6 +180,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="33dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="callPhone"
+                    app:layout_constraintStart_toEndOf="@+id/phone_button"
+                    app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                    app:srcCompat="@android:drawable/ic_menu_call" />
+
                 <ScrollView
                     android:id="@+id/scrollView2"
                     android:layout_width="309dp"
@@ -190,15 +225,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewCity2" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="47dp"
-                    android:layout_height="51dp"
+                    android:id="@+id/pickDateButton"
+                    android:layout_width="46dp"
+                    android:layout_height="45dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:onClick="setDate"
                     app:layout_constraintStart_toEndOf="@+id/editBirthdate"
                     app:layout_constraintTop_toBottomOf="@+id/textViewBirthdate"
                     app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

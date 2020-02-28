@@ -2,7 +2,6 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;

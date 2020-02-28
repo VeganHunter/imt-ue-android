@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.example.imt_atlantique.myfirstapplication" >
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="CHOCOLAT"
+        android:label="virus.exe"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
@@ -19,6 +21,25 @@
         <activity android:name=".DateActivity" android:label="@string/pickDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ViewLastNameActivity" android:label="@string/viewLastNameActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EditFirstNameActivity" android:label="@string/editFirstNameActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".DialActivity" android:label="@string/dialActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

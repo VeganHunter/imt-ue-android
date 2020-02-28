@@ -2,13 +2,10 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +18,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import static android.content.Intent.ACTION_DIAL;
+import static android.content.Intent.ACTION_EDIT;
 import static android.content.Intent.ACTION_PICK;
+import static android.content.Intent.ACTION_VIEW;
 import static android.text.InputType.TYPE_CLASS_PHONE;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText cityField;
     private Spinner departmentField;
     private TableLayout table;
+
+    // LIFECYCLE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,45 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "onDestroy method");
     }
 
-    public void validateAction (View v) {
-
-        String textToShow = firstNameField.getText().toString();
-
-        Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
-
-        final Snackbar sb = Snackbar.make(v, textToShow, Snackbar.LENGTH_LONG);
-
-        sb.show();
-        sb.setAction(R.string.dismiss, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Respond to the click, such as by undoing the modification that caused
-                        // this message to be displayed
-                    }
-                });
-
-        String firstName = firstNameField.getText().toString();
-        String lastName = lastNameField.getText().toString();
-        String city = cityField.getText().toString();
-        String birthdate = birthdateField.getText().toString();
-
-        List<String> phoneNumbers = new ArrayList<String>();
-
-        for(int i =0; i< table.getChildCount(); i++){
-            TableRow r = (TableRow) table.getChildAt(i);
-            EditText t = (EditText) r.getChildAt(0);
-
-            String phoneNumber = t.getText().toString();
-            if (!phoneNumber.equals(""))
-                phoneNumbers.add(phoneNumber);
-        }
-
-        User user = new User(firstName, lastName, city, birthdate, phoneNumbers);
-        Intent intent =  new Intent(this, DisplayActivity.class);
-        intent.putExtra("userParcelable", user);
-        startActivity(intent);
-
-    }
+    // MENU ACTIONS
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -202,42 +164,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean setDate(View v) {
-
-        /*
-        Intent intent =  new Intent(this, DateActivity.class);
-        startActivityForResult(intent, 5);
-        */
-
-        Intent intent = new Intent();
-        intent.setAction(ACTION_PICK);
-
-        // Verify that the intent will resolve to an activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 5);
-        }
-
-        return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == 5) { // DateActivity
-
-            if (resultCode == 1) { // confirm button
-
-                String pickedDate = data.getStringExtra("date");
-                birthdateField.setText(pickedDate);
-            }
-
-            if (resultCode == 0) { // cancel button
-                // do nothing
-            }
-        }
-    }
 
     public boolean wikipedia_search(MenuItem item) {
 
@@ -254,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             String url = "http://fr.wikipedia.org/?search=" + city;
             Uri uri = Uri.parse(url);
 
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            Intent intent = new Intent(ACTION_VIEW, uri);
 
             // Verify that the intent will resolve to an activity
             if (intent.resolveActivity(getPackageManager()) != null) {
@@ -295,7 +221,91 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        public void addPhoneNumber (View v) {
+    // BUTTONS
+
+
+    public void validateAction (View v) {
+
+        String textToShow = firstNameField.getText().toString();
+
+        Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
+
+        final Snackbar sb = Snackbar.make(v, textToShow, Snackbar.LENGTH_LONG);
+
+        sb.show();
+        sb.setAction(R.string.dismiss, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Respond to the click, such as by undoing the modification that caused
+                // this message to be displayed
+            }
+        });
+
+        String firstName = firstNameField.getText().toString();
+        String lastName = lastNameField.getText().toString();
+        String city = cityField.getText().toString();
+        String birthdate = birthdateField.getText().toString();
+
+        List<String> phoneNumbers = new ArrayList<String>();
+
+        for(int i =0; i< table.getChildCount(); i++){
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+
+            String phoneNumber = t.getText().toString();
+            if (!phoneNumber.equals(""))
+                phoneNumbers.add(phoneNumber);
+        }
+
+        User user = new User(firstName, lastName, city, birthdate, phoneNumbers);
+        Intent intent =  new Intent(this, DisplayActivity.class);
+        intent.putExtra("userParcelable", user);
+        startActivity(intent);
+
+    }
+
+    public boolean setDate(View v) {
+
+        Intent intent = new Intent();
+        intent.setAction(ACTION_PICK);
+
+        // Verify that the intent will resolve to an activity
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 5);
+        }
+
+        return true;
+    }
+
+    public boolean viewLastName(View v) {
+
+        Intent intent = new Intent();
+        intent.setAction(ACTION_VIEW);
+        intent.putExtra("lastName", lastNameField.getText().toString());
+
+        // Verify that the intent will resolve to an activity
+        if (intent.resolveActivity(getPackageManager()) != null) {
+
+            startActivity(intent);
+        }
+
+        return true;
+    }
+
+    public boolean editFirstName(View v) {
+
+        Intent intent = new Intent();
+        intent.setAction(ACTION_EDIT);
+
+        // Verify that the intent will resolve to an activity
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 7);
+        }
+
+        return true;
+    }
+
+    public void addPhoneNumber (View v) {
 
         EditText lEditText = new EditText(this);
         lEditText.setInputType(TYPE_CLASS_PHONE);
@@ -316,6 +326,74 @@ public class MainActivity extends AppCompatActivity {
         table.addView(newRow);
 
     }
+
+    public boolean callPhone (View v) {
+        Intent intent = new Intent();
+        intent.setAction(ACTION_DIAL);
+
+        ArrayList<String> phoneNumbers = new ArrayList<String>();
+
+        for(int i =0; i< table.getChildCount(); i++){
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+
+            String phoneNumber = t.getText().toString();
+            if (!phoneNumber.equals(""))
+                phoneNumbers.add(phoneNumber);
+        }
+
+        intent.putStringArrayListExtra("phoneList", phoneNumbers);
+
+        // Verify that the intent will resolve to an activity
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        return true;
+    }
+
+    // MISC
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.i("DoubleLose", "onActivityResult");
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 5) { // DateActivity
+
+            if (resultCode == 1) { // confirm button
+
+                String pickedDate = data.getStringExtra("date");
+                birthdateField.setText(pickedDate);
+            }
+
+            if (resultCode == 0) { // cancel button
+                // do nothing
+            }
+        }
+
+        else if (requestCode == 7) { //EditFirstNameActivity
+
+            Log.i("DoubleLose", "req code ok");
+
+
+            if (resultCode == 1) { // confirm button
+
+                Log.i("DoubleLose", "resul code ok");
+
+
+                String pickedFirstName = data.getStringExtra("firstName");
+                firstNameField.setText(pickedFirstName);
+
+            }
+
+            if (resultCode == 0) { // cancel button
+                // do nothing
+            }
+        }
+    }
+
+    // SAVING
 
     public void onSaveInstanceState(Bundle outState) {
 
