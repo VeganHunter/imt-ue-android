@@ -15,4 +15,6 @@
     <string name="add_phone">+</string>
     <string name="rechercheWikipedia">Recherche Wikipédia</string>
     <string name="share">Partager ville</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
 </resources>

@@ -45,7 +45,6 @@ public class User implements Parcelable {
         dest.writeString(city);
         dest.writeString(birthdate);
         dest.writeList(phoneNumbers);
-        Log.i("user", "06-"+phoneNumbers.get(0));
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

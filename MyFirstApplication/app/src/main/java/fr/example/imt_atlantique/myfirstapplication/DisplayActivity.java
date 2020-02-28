@@ -3,18 +3,11 @@ package fr.example.imt_atlantique.myfirstapplication;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.text.InputType.TYPE_CLASS_PHONE;
 
 public class DisplayActivity extends AppCompatActivity {
 
@@ -44,7 +37,6 @@ public class DisplayActivity extends AppCompatActivity {
         birthdateTextView.setText(user.getBirthdate());
 
         List<String> phoneNumbers = user.getPhoneNumbers();
-        Log.i("victor", "06-"+phoneNumbers.get(0));
         for(int i=0; i<phoneNumbers.size() ;i++){
             TextView textView = new TextView(this);
             textView.setText(phoneNumbers.get(i));

@@ -1,5 +1,6 @@
 package fr.example.imt_atlantique.myfirstapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -170,16 +171,15 @@ public class MainActivity extends AppCompatActivity {
             TableRow r = (TableRow) table.getChildAt(i);
             EditText t = (EditText) r.getChildAt(0);
 
-            String phonenb = t.getText().toString();
-            Log.i("thomas", "06-"+phonenb);
-            if (!phonenb.equals(""))
-                phoneNumbers.add(phonenb);
+            String phoneNumber = t.getText().toString();
+            if (!phoneNumber.equals(""))
+                phoneNumbers.add(phoneNumber);
         }
 
         User user = new User(firstName, lastName, city, birthdate, phoneNumbers);
         Intent intent =  new Intent(this, DisplayActivity.class);
         intent.putExtra("userParcelable", user);
-        startActivityForResult(intent, 4);
+        startActivity(intent);
 
     }
 
@@ -199,6 +199,33 @@ public class MainActivity extends AppCompatActivity {
         table.removeAllViews();
 
         return true;
+    }
+
+    public boolean setDate(View v) {
+
+        Intent intent =  new Intent(this, DateActivity.class);
+        startActivityForResult(intent, 5);
+
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 5) { // DateActivity
+
+            if (resultCode == 1) { // confirm button
+
+                String pickedDate = data.getStringExtra("date");
+                birthdateField.setText(pickedDate);
+            }
+
+            if (resultCode == 0) { // cancel button
+                // do nothing
+            }
+        }
     }
 
     public boolean wikipedia_search(MenuItem item) {

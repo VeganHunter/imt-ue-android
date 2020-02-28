@@ -44,7 +44,7 @@
             android:id="@+id/birthdateTextView"
             android:layout_width="119dp"
             android:layout_height="65dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,9 @@
 
         <TableLayout
             android:id="@+id/phoneLayout"
-            android:layout_width="120dp"
-            android:layout_height="272dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="121dp"
+            android:layout_height="191dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

@@ -189,6 +189,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewCity2" />
 
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="47dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="setDate"
+                    app:layout_constraintStart_toEndOf="@+id/editBirthdate"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBirthdate"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
