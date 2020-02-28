@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +20,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
-
 import static android.text.InputType.TYPE_CLASS_PHONE;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private EditText firstNameField;
     private EditText lastNameField;
@@ -154,7 +155,14 @@ public class MainActivity extends AppCompatActivity  {
                     }
                 });
 
-        Log.i("Message", "Button method "+textToShow);
+        String firstName = firstNameField.getText().toString();
+        String lastName = lastNameField.getText().toString();
+        String city = cityField.getText().toString();
+
+        User user = new User(firstName, lastName, city);
+        Intent intent =  new Intent(this, DisplayActivity.class);
+        intent.putExtra("userParcelable", user);
+        startActivityForResult(intent, 4);
 
     }
 
