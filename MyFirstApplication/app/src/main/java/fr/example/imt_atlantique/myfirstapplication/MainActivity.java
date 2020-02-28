@@ -20,6 +20,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.text.InputType.TYPE_CLASS_PHONE;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<nbPhones; i++) {
             String phone = prefs.getString("phone"+i, "");
             addPhoneNumber(table);
-            TableRow r = (TableRow)table.getChildAt(i);
-            EditText t = (EditText)r.getChildAt(0);
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
             t.setText(phone);
         }
     }
@@ -123,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("nbPhones", nbPhones);
 
         for (int i=0; i<nbPhones; i++) {
-            TableRow r = (TableRow)table.getChildAt(i);
-            EditText t = (EditText)r.getChildAt(0);
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
             editor.putString("phone"+i, t.getText().toString());
         }
 
@@ -158,8 +162,21 @@ public class MainActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
         String city = cityField.getText().toString();
+        String birthdate = birthdateField.getText().toString();
 
-        User user = new User(firstName, lastName, city);
+        List<String> phoneNumbers = new ArrayList<String>();
+
+        for(int i =0; i< table.getChildCount(); i++){
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+
+            String phonenb = t.getText().toString();
+            Log.i("thomas", "06-"+phonenb);
+            if (!phonenb.equals(""))
+                phoneNumbers.add(phonenb);
+        }
+
+        User user = new User(firstName, lastName, city, birthdate, phoneNumbers);
         Intent intent =  new Intent(this, DisplayActivity.class);
         intent.putExtra("userParcelable", user);
         startActivityForResult(intent, 4);
@@ -182,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
         table.removeAllViews();
 
         return true;
-
     }
 
     public boolean wikipedia_search(MenuItem item) {
