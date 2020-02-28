@@ -16,7 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayActivity"></activity>
-        <activity android:name=".DateActivity"></activity>
+        <activity android:name=".DateActivity" android:label="@string/pickDateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

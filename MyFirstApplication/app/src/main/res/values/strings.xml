@@ -17,4 +17,5 @@
     <string name="share">Partager ville</string>
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
+    <string name="pickDateActivity">Pick Date Activity</string>
 </resources>

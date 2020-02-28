@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Intent.ACTION_PICK;
 import static android.text.InputType.TYPE_CLASS_PHONE;
 
 public class MainActivity extends AppCompatActivity {
@@ -203,8 +204,18 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean setDate(View v) {
 
+        /*
         Intent intent =  new Intent(this, DateActivity.class);
         startActivityForResult(intent, 5);
+        */
+
+        Intent intent = new Intent();
+        intent.setAction(ACTION_PICK);
+
+        // Verify that the intent will resolve to an activity
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 5);
+        }
 
         return true;
     }
@@ -259,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean share(MenuItem item) {
 
         boolean success = true;
-
 
         String city = cityField.getText().toString();
 

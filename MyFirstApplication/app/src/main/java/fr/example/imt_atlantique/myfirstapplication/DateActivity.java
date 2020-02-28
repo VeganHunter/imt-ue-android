@@ -27,7 +27,7 @@ public class DateActivity extends AppCompatActivity {
         Intent intent =  new Intent(this, MainActivity.class);
 
         String year = String.valueOf(datePicker.getYear());
-        String month = String.valueOf(datePicker.getMonth());
+        String month = String.valueOf(datePicker.getMonth()+1); // months are indexed at 0
         String day = String.valueOf(datePicker.getDayOfMonth());
 
         String date = day+"/"+month+"/"+year;
