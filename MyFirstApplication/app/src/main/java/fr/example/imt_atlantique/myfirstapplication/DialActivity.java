@@ -77,12 +77,4 @@ public class DialActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{permission},42);
     }
 
-    private void callAfterCheckingPermission(Intent callIntent) {
-
-        if (checkPermission(CALL_PHONE)) { // if we have permission
-            if (callIntent.resolveActivity(getPackageManager()) != null)  // if an activity exists
-                startActivity(callIntent);
-        }
-    }
-
 }
