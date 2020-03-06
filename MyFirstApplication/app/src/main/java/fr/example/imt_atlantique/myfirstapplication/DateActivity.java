@@ -22,7 +22,7 @@ public class DateActivity extends AppCompatActivity {
 
     public void confirmDate(View v) {
 
-        Intent intent =  new Intent(this, MainActivity.class);
+        Intent intent =  new Intent();
 
         String year = String.valueOf(datePicker.getYear());
         String month = String.valueOf(datePicker.getMonth()+1); // months are indexed at 0
@@ -31,18 +31,18 @@ public class DateActivity extends AppCompatActivity {
         String date = day+"/"+month+"/"+year;
         intent.putExtra("date", date);
 
-        setResult(1, intent);
+        setResult(RESULT_OK, intent);
         finish();
 
     }
 
     public void cancelDate(View v) {
 
-        Intent intent =  new Intent(this, MainActivity.class);
+        Intent intent =  new Intent();
 
         // Don't send anything
 
-        setResult(0, intent);
+        setResult(RESULT_CANCELED, intent);
         finish();
 
     }

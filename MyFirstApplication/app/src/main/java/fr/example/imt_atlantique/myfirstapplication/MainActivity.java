@@ -361,25 +361,25 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 5) { // DateActivity
 
-            if (resultCode == 1) { // confirm button
+            if (resultCode == RESULT_OK) { // confirm button
 
                 String pickedDate = data.getStringExtra("date");
                 birthdateField.setText(pickedDate);
             }
 
-            if (resultCode == 0) { // cancel button
+            if (resultCode == RESULT_CANCELED) { // cancel button
                 // do nothing
             }
         }
 
         else if (requestCode == 7) { //EditFirstNameActivity
 
-            Log.i("DoubleLose", "req code ok");
+            Log.i("DoubleLose", "request code ok");
 
 
-            if (resultCode == 1) { // confirm button
+            if (resultCode == RESULT_OK) { // confirm button
 
-                Log.i("DoubleLose", "resul code ok");
+                Log.i("DoubleLose", "result code ok");
 
 
                 String pickedFirstName = data.getStringExtra("firstName");
@@ -387,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            if (resultCode == 0) { // cancel button
+            if (resultCode == RESULT_CANCELED) { // cancel button
                 // do nothing
             }
         }

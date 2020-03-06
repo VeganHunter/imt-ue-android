@@ -17,7 +17,6 @@ public class EditFirstNameActivity extends AppCompatActivity {
 
         Log.i("DoubleLose", "lancement onCreate");
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_first_name);
 
@@ -28,13 +27,11 @@ public class EditFirstNameActivity extends AppCompatActivity {
 
         Log.i("DoubleLose", "lancement confirm");
 
-
         String firstName = firstNameField.getText().toString();
 
         Log.i("DoubleLose", "lancement confirm111");
 
-
-        Intent intent =  new Intent(this, MainActivity.class);
+        Intent intent =  new Intent();
 
         Log.i("DoubleLose", "lancement confirm2222");
 
@@ -42,28 +39,24 @@ public class EditFirstNameActivity extends AppCompatActivity {
 
         Log.i("DoubleLose", "lancement confirm3333");
 
-
-        setResult(1, intent);
+        setResult(RESULT_OK, intent);
 
         Log.i("DoubleLose", "lancement confirm4444");
 
-        finish();
+        super.finish();
 
         Log.i("DoubleLose", "lancement confirm55555555");
-
 
     }
 
     public void cancelName(View v) {
 
-        Intent intent =  new Intent(this, MainActivity.class);
+        Intent intent =  new Intent();
 
         // Don't send anything
 
-        setResult(0, intent);
-        finish();
+        setResult(RESULT_CANCELED, intent);
+        super.finish();
 
     }
-
-
 }
