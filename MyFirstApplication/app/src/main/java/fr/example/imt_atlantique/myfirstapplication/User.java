@@ -2,8 +2,6 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
