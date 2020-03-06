@@ -46,18 +46,14 @@ public class DialActivity extends AppCompatActivity {
             callbutton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    Uri uri = Uri.parse(textView.getText().toString());
+                    Uri uri = Uri.parse("tel:"+textView.getText().toString());
                     Intent callIntent = new Intent(Intent.ACTION_CALL, uri);
-
-                    Log.i("THOMAS", "..."+uri.toString());
-
+                    
                     if (!checkPermission(CALL_PHONE)) // Request permission if we don't have it
                         requestPermission(CALL_PHONE);
 
                     if (checkPermission(CALL_PHONE) && callIntent.resolveActivity(getPackageManager()) != null)  // if we have the permission AND an activity exists
                             startActivity(callIntent);
-
-                    // TODO: no activity exists :(
 
                 }
             });
