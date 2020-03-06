@@ -2,6 +2,9 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText cityField;
     private Spinner departmentField;
     private TableLayout table;
+    private InputFragment fragment;
 
     // LIFECYCLE
 
@@ -44,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i("Lifecycle", "onCreate method");
 
-        firstNameField = findViewById(R.id.editTextfirstName);
+        fragment = new InputFragment();
+        FragmentManager fragmentMngr = getSupportFragmentManager();
+        FragmentTransaction tx = fragmentMngr.beginTransaction();
+        View view = findViewById(R.id.constraintLayout2);
+        int containerViewId = ((ViewGroup) view.getParent()).getId();
+        tx.add(containerViewId, fragment);
+        tx.commit();
+
+        firstNameField = findViewById(R.id.editTextfirstName); // returns null ;(
         lastNameField = findViewById(R.id.editTextLastName);
         birthdateField = findViewById(R.id.editBirthdate);
         cityField = findViewById(R.id.editTextCity);

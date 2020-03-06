@@ -25,19 +25,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("thomas", ""+fragment.getClass());
         fragment.displayFragment(textToShow);
 
-        /*
-        final Snackbar sb = Snackbar.make(v, textToShow, Snackbar.LENGTH_LONG);
-
-        sb.show();
-        sb.setAction(R.string.dismiss, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Respond to the click, such as by undoing the modification that caused
-                // this message to be displayed
-            }
-        });
-         */
-
         return true;
     }
 

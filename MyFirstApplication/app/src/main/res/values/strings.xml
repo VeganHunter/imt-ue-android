@@ -23,4 +23,7 @@
     <string name="enter_name">Ecriver votre nom (stp...)</string>
     <string name="dialActivity">Choix de victime</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
