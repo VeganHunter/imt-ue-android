@@ -48,7 +48,7 @@ public class DialActivity extends AppCompatActivity {
 
                     Uri uri = Uri.parse("tel:"+textView.getText().toString());
                     Intent callIntent = new Intent(Intent.ACTION_CALL, uri);
-                    
+
                     if (!checkPermission(CALL_PHONE)) // Request permission if we don't have it
                         requestPermission(CALL_PHONE);
 

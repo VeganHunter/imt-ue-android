@@ -18,8 +18,8 @@
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
     <string name="pickDateActivity">Pick Date Activity</string>
-    <string name="viewLastNameActivity">View last name...</string>
-    <string name="editFirstNameActivity">Edit first name...</string>
+    <string name="viewLastNameActivity">Consulter le nom de famille...</string>
+    <string name="editFirstNameActivity">Modifier le prénom...</string>
     <string name="enter_name">Ecriver votre nom (stp...)</string>
     <string name="dialActivity">Choix de victime</string>
 

@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="app_name">MyFirstApplication</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="birthdate">Date of birth</string>
+    <string name="city">City</string>
+    <string name="department">Area</string>
+    <string name="send">Send</string>
+    <string name="default_first_name">John</string>
+    <string name="default_last_name">Smith</string>
+    <string name="default_city">Nouillorque</string>
+    <string name="default_date">DD/MM/YYYY</string>
+    <string name="dismiss">Please go away</string>
+    <string name="reset_action">Gonna reset</string>
+    <string name="add_phone">+</string>
+    <string name="rechercheWikipedia">Wikipedia search</string>
+    <string name="share">Share city</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="pickDateActivity">Pick Date Activity</string>
+    <string name="viewLastNameActivity">View last name...</string>
+    <string name="editFirstNameActivity">Edit first name...</string>
+    <string name="enter_name">pls right you\'re name</string>
+    <string name="dialActivity">Choose your victim</string>
+
+</resources>
