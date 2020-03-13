@@ -59,6 +59,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResumeFragments() {
+        Log.i("Lifecycle", "onResumeFragments method");
+
+        firstNameField = findViewById(R.id.editTextfirstName);
+        lastNameField = findViewById(R.id.editTextLastName);
+        birthdateField = findViewById(R.id.editBirthdate);
+        cityField = findViewById(R.id.editTextCity);
+        departmentField = findViewById(R.id.spinner);
+        table = findViewById(R.id.table_layout);
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+
+        String savedPrenom = prefs.getString("firstName", "");
+        firstNameField.setText(savedPrenom);
+
+        String savedNom = prefs.getString("lastName", "");
+        lastNameField.setText(savedNom);
+
+        String saveBirthdate = prefs.getString("birthdate", "");
+        birthdateField.setText(saveBirthdate);
+
+        String savedVille = prefs.getString("ville", "");
+        cityField.setText(savedVille);
+
+        int numdep = prefs.getInt("numDep", 0);
+        departmentField.setSelection(numdep);
+
+        int nbPhones = prefs.getInt("nbPhones",0);
+        for (int i=0; i<nbPhones; i++) {
+            String phone = prefs.getString("phone"+i, "");
+            addPhoneNumber(table);
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+            t.setText(phone);
+        }
+
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         Log.i("Lifecycle", "onStart method");
@@ -90,26 +129,26 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        String prenom = fragment.getFirstNameField().getText().toString();
+        String prenom = firstNameField.getText().toString();
         editor.putString("firstName", prenom);
 
-        String nom = fragment.getLastNameField().getText().toString();
+        String nom = lastNameField.getText().toString();
         editor.putString("lastName", nom);
 
-        String birthdate = fragment.getBirthdateField().getText().toString();
+        String birthdate = birthdateField.getText().toString();
         editor.putString("birthdate", birthdate);
 
-        String ville = fragment.getCityField().getText().toString();
+        String ville = cityField.getText().toString();
         editor.putString("ville", ville);
 
-        int numdep = fragment.getDepartmentField().getSelectedItemPosition();
+        int numdep = departmentField.getSelectedItemPosition();
         editor.putInt("numDep", numdep);
 
-        int nbPhones = fragment.getTable().getChildCount();
+        int nbPhones = table.getChildCount();
         editor.putInt("nbPhones", nbPhones);
 
         for (int i=0; i<nbPhones; i++) {
-            TableRow r = (TableRow) fragment.getTable().getChildAt(i);
+            TableRow r = (TableRow) table.getChildAt(i);
             EditText t = (EditText) r.getChildAt(0);
             editor.putString("phone"+i, t.getText().toString());
         }
@@ -203,6 +242,28 @@ public class MainActivity extends AppCompatActivity {
 
     // BUTTONS
 
+
+    public void addPhoneNumber (View v) {
+
+        EditText lEditText = new EditText(this);
+        lEditText.setInputType(TYPE_CLASS_PHONE);
+        lEditText.setHint("Phone Number");
+
+        Button removeButton = new Button(this);
+        removeButton.setText("X");
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((ViewGroup)v.getParent().getParent()).removeView((ViewGroup)v.getParent());
+            }
+        });
+
+        TableRow newRow = new TableRow(this);
+        newRow.addView(lEditText);
+        newRow.addView(removeButton);
+        table.addView(newRow);
+
+    }
 
     public void validateAction (View v) {
 
@@ -325,6 +386,11 @@ public class MainActivity extends AppCompatActivity {
 
                 String pickedDate = data.getStringExtra("date");
                 birthdateField.setText(pickedDate);
+                Log.i("comm", "."+pickedDate);
+                Log.i("comm", "."+birthdateField);
+                Log.i("comm", "."+birthdateField.getText());
+                birthdateField.setText(null);
+
             }
 
             if (resultCode == RESULT_CANCELED) { // cancel button
@@ -352,44 +418,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    // SAVING
-
-    public void onSaveInstanceState(Bundle outState) {
-
-        super.onSaveInstanceState(outState);
-
-        String prenom = firstNameField.getText().toString();
-        outState.putString("prenom", prenom);
-
-        String nom = lastNameField.getText().toString();
-        outState.putString("nom", nom);
-
-        String birthdate = birthdateField.getText().toString();
-        outState.putString("birthdate", birthdate);
-
-        String ville = cityField.getText().toString();
-        outState.putString("ville", ville);
-
-        // phones and birthdate are not handled, but they're saved in prefs
-
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-
-        String restoredPrenom = savedInstanceState.getString("prenom");
-        firstNameField.setText(restoredPrenom);
-
-        String restoredNom = savedInstanceState.getString("nom");
-        lastNameField.setText(restoredNom);
-
-        String restoredBirthdate = savedInstanceState.getString("birthdate");
-        birthdateField.setText(restoredBirthdate);
-
-        String restoredVille = savedInstanceState.getString("ville");
-        cityField.setText(restoredVille);
-
-
-    }
-
 }

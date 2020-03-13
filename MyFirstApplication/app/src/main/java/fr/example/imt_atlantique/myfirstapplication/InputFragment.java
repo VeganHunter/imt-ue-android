@@ -37,13 +37,6 @@ public class InputFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private EditText firstNameField;
-    private EditText lastNameField;
-    private EditText birthdateField;
-    private EditText cityField;
-    private Spinner departmentField;
-    private TableLayout table;
-
     public InputFragment() {
         // Required empty public constructor
         Log.i("Fragment Lifecycle", "empty constructor method");
@@ -78,93 +71,17 @@ public class InputFragment extends Fragment {
         }
     }
 
+    /* Fonction pour charger des les données des prefs
+    @Override
+    public void View onViewCreated*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_input, container, false);
-
-        firstNameField = rootView.findViewById(R.id.editTextfirstName);
-        lastNameField = rootView.findViewById(R.id.editTextLastName);
-        birthdateField = rootView.findViewById(R.id.editBirthdate);
-        cityField = rootView.findViewById(R.id.editTextCity);
-        departmentField = rootView.findViewById(R.id.spinner);
-        table = rootView.findViewById(R.id.table_layout);
-
-        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
-
-        String savedPrenom = prefs.getString("firstName", "");
-        firstNameField.setText(savedPrenom);
-
-        String savedNom = prefs.getString("lastName", "");
-        lastNameField.setText(savedNom);
-
-        String saveBirthdate = prefs.getString("birthdate", "");
-        birthdateField.setText(saveBirthdate);
-
-        String savedVille = prefs.getString("ville", "");
-        cityField.setText(savedVille);
-
-        int numdep = prefs.getInt("numDep", 0);
-        departmentField.setSelection(numdep);
-
-        int nbPhones = prefs.getInt("nbPhones",0);
-        for (int i=0; i<nbPhones; i++) {
-            String phone = prefs.getString("phone"+i, "");
-            addPhoneNumber(table);
-            TableRow r = (TableRow) table.getChildAt(i);
-            EditText t = (EditText) r.getChildAt(0);
-            t.setText(phone);
-        }
-
         return rootView;
 
     }
 
-    public void addPhoneNumber (View v) {
-
-        EditText lEditText = new EditText(getActivity());
-        lEditText.setInputType(TYPE_CLASS_PHONE);
-        lEditText.setHint("Phone Number");
-
-        Button removeButton = new Button(getActivity());
-        removeButton.setText("X");
-
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ((ViewGroup)v.getParent().getParent()).removeView((ViewGroup)v.getParent());
-            }
-        });
-
-        TableRow newRow = new TableRow(getActivity());
-        newRow.addView(lEditText);
-        newRow.addView(removeButton);
-        table.addView(newRow);
-
-    }
-
-    public EditText getFirstNameField() {
-        return firstNameField;
-    }
-
-    public EditText getLastNameField() {
-        return lastNameField;
-    }
-
-    public EditText getBirthdateField() {
-        return firstNameField;
-    }
-
-    public EditText getCityField() {
-        return cityField;
-    }
-
-    public Spinner getDepartmentField() {
-        return departmentField;
-    }
-
-    public TableLayout getTable() {
-        return table;
-    }
 }
