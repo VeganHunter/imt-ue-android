@@ -71,9 +71,41 @@ public class InputFragment extends Fragment {
         }
     }
 
-    /* Fonction pour charger des les données des prefs
+    /* Fonction pour charger des les données des prefs */
     @Override
-    public void View onViewCreated*/
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        ((MainActivity) getActivity()).onFragmentInput();
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
+
+        String savedPrenom = prefs.getString("firstName", "");
+        ((MainActivity) getActivity()).getFirstNameField().setText(savedPrenom);
+
+        String savedNom = prefs.getString("lastName", "");
+        ((MainActivity) getActivity()).getLastNameField().setText(savedNom);
+
+        String saveBirthdate = prefs.getString("birthdate", "");
+        ((MainActivity) getActivity()).getBirthdateField().setText(saveBirthdate);
+
+        String savedVille = prefs.getString("ville", "");
+        ((MainActivity) getActivity()).getCityField().setText(savedVille);
+
+        int numdep = prefs.getInt("numDep", 0);
+        ((MainActivity) getActivity()).getDepartmentField().setSelection(numdep);
+
+        int nbPhones = prefs.getInt("nbPhones",0);
+        for (int i=0; i<nbPhones; i++) {
+            String phone = prefs.getString("phone"+i, "");
+            ((MainActivity) getActivity()).addPhoneNumber(((MainActivity) getActivity()).getTable());
+            TableRow r = (TableRow) ((MainActivity) getActivity()).getTable().getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+            t.setText(phone);
+        }
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

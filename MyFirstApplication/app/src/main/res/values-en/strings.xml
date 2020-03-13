@@ -23,5 +23,6 @@
     <string name="editFirstNameActivity">Edit first name...</string>
     <string name="enter_name">pls right you\'re name</string>
     <string name="dialActivity">Choose your victim</string>
+    <string name="back">Back</string>
 
 </resources>

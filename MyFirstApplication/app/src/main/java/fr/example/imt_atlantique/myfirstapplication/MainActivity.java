@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText cityField;
     private Spinner departmentField;
     private TableLayout table;
-    private InputFragment fragment;
+    private InputFragment inputFragment;
+    private ViewLastNameFragment viewLastNameFragment;
 
     // LIFECYCLE
 
@@ -48,19 +49,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i("Lifecycle", "onCreate method");
 
-        fragment = new InputFragment();
+        inputFragment = new InputFragment();
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
-        tx.add(containerViewId, fragment, "mainFragment");
+        tx.add(containerViewId, inputFragment, "mainFragment");
         tx.commit();
 
     }
 
-    @Override
-    protected void onResumeFragments() {
-        Log.i("Lifecycle", "onResumeFragments method");
+    public void onFragmentInput() {
 
         firstNameField = findViewById(R.id.editTextfirstName);
         lastNameField = findViewById(R.id.editTextLastName);
@@ -68,32 +67,6 @@ public class MainActivity extends AppCompatActivity {
         cityField = findViewById(R.id.editTextCity);
         departmentField = findViewById(R.id.spinner);
         table = findViewById(R.id.table_layout);
-
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-
-        String savedPrenom = prefs.getString("firstName", "");
-        firstNameField.setText(savedPrenom);
-
-        String savedNom = prefs.getString("lastName", "");
-        lastNameField.setText(savedNom);
-
-        String saveBirthdate = prefs.getString("birthdate", "");
-        birthdateField.setText(saveBirthdate);
-
-        String savedVille = prefs.getString("ville", "");
-        cityField.setText(savedVille);
-
-        int numdep = prefs.getInt("numDep", 0);
-        departmentField.setSelection(numdep);
-
-        int nbPhones = prefs.getInt("nbPhones",0);
-        for (int i=0; i<nbPhones; i++) {
-            String phone = prefs.getString("phone"+i, "");
-            addPhoneNumber(table);
-            TableRow r = (TableRow) table.getChildAt(i);
-            EditText t = (EditText) r.getChildAt(0);
-            t.setText(phone);
-        }
 
     }
 
@@ -317,18 +290,27 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+    
+    public boolean backToInput(View v) {
+        viewLastNameFragment = new ViewLastNameFragment();
+        FragmentManager fragmentMngr = getSupportFragmentManager();
+        FragmentTransaction tx = fragmentMngr.beginTransaction();
+        View view = findViewById(R.id.constraintLayout2);
+        int containerViewId = ((ViewGroup) view.getParent()).getId();
+        tx.replace(containerViewId, inputFragment, "mainFragment");
+        tx.commit();
+        return true;
+    }
 
     public boolean viewLastName(View v) {
 
-        Intent intent = new Intent();
-        intent.setAction(ACTION_VIEW);
-        intent.putExtra("lastName", lastNameField.getText().toString());
-
-        // Verify that the intent will resolve to an activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-
-            startActivity(intent);
-        }
+        viewLastNameFragment = new ViewLastNameFragment();
+        FragmentManager fragmentMngr = getSupportFragmentManager();
+        FragmentTransaction tx = fragmentMngr.beginTransaction();
+        View view = findViewById(R.id.constraintLayout2);
+        int containerViewId = ((ViewGroup) view.getParent()).getId();
+        tx.replace(containerViewId, viewLastNameFragment, "mainFragment");
+        tx.commit();
 
         return true;
     }
@@ -345,8 +327,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
-
 
     public boolean callPhone (View v) {
         Intent intent = new Intent();
@@ -376,46 +356,53 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Log.i("DoubleLose", "onActivityResult");
 
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 5) { // DateActivity
-
             if (resultCode == RESULT_OK) { // confirm button
-
                 String pickedDate = data.getStringExtra("date");
                 birthdateField.setText(pickedDate);
-                Log.i("comm", "."+pickedDate);
-                Log.i("comm", "."+birthdateField);
-                Log.i("comm", "."+birthdateField.getText());
-                birthdateField.setText(null);
-
             }
-
             if (resultCode == RESULT_CANCELED) { // cancel button
                 // do nothing
             }
         }
 
         else if (requestCode == 7) { //EditFirstNameActivity
-
-            Log.i("DoubleLose", "request code ok");
-
-
             if (resultCode == RESULT_OK) { // confirm button
-
-                Log.i("DoubleLose", "result code ok");
-
-
                 String pickedFirstName = data.getStringExtra("firstName");
                 firstNameField.setText(pickedFirstName);
-
             }
-
             if (resultCode == RESULT_CANCELED) { // cancel button
                 // do nothing
             }
         }
+    }
+
+
+    //GETTERS
+    public EditText getFirstNameField() {
+        return firstNameField;
+    }
+
+    public EditText getLastNameField() {
+        return lastNameField;
+    }
+
+    public EditText getBirthdateField() {
+        return birthdateField;
+    }
+
+    public EditText getCityField() {
+        return cityField;
+    }
+
+    public Spinner getDepartmentField() {
+        return departmentField;
+    }
+
+    public TableLayout getTable() {
+        return table;
     }
 }
