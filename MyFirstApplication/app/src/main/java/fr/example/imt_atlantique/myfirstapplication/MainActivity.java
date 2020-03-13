@@ -53,41 +53,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
-        tx.add(containerViewId, fragment);
+        tx.add(containerViewId, fragment, "mainFragment");
         tx.commit();
 
-        firstNameField = findViewById(R.id.editTextfirstName); // returns null ;(
-        lastNameField = findViewById(R.id.editTextLastName);
-        birthdateField = findViewById(R.id.editBirthdate);
-        cityField = findViewById(R.id.editTextCity);
-        departmentField = findViewById(R.id.spinner);
-        table = findViewById(R.id.table_layout);
-
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-
-        String savedPrenom = prefs.getString("firstName", "");
-        firstNameField.setText(savedPrenom);
-
-        String savedNom = prefs.getString("lastName", "");
-        lastNameField.setText(savedNom);
-
-        String saveBirthdate = prefs.getString("birthdate", "");
-        birthdateField.setText(saveBirthdate);
-
-        String savedVille = prefs.getString("ville", "");
-        cityField.setText(savedVille);
-
-        int numdep = prefs.getInt("numDep", 0);
-        departmentField.setSelection(numdep);
-
-        int nbPhones = prefs.getInt("nbPhones",0);
-        for (int i=0; i<nbPhones; i++) {
-            String phone = prefs.getString("phone"+i, "");
-            addPhoneNumber(table);
-            TableRow r = (TableRow) table.getChildAt(i);
-            EditText t = (EditText) r.getChildAt(0);
-            t.setText(phone);
-        }
     }
 
     @Override
@@ -122,26 +90,26 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        String prenom = firstNameField.getText().toString();
+        String prenom = fragment.getFirstNameField().getText().toString();
         editor.putString("firstName", prenom);
 
-        String nom = lastNameField.getText().toString();
+        String nom = fragment.getLastNameField().getText().toString();
         editor.putString("lastName", nom);
 
-        String birthdate = birthdateField.getText().toString();
+        String birthdate = fragment.getBirthdateField().getText().toString();
         editor.putString("birthdate", birthdate);
 
-        String ville = cityField.getText().toString();
+        String ville = fragment.getCityField().getText().toString();
         editor.putString("ville", ville);
 
-        int numdep = departmentField.getSelectedItemPosition();
+        int numdep = fragment.getDepartmentField().getSelectedItemPosition();
         editor.putInt("numDep", numdep);
 
-        int nbPhones = table.getChildCount();
+        int nbPhones = fragment.getTable().getChildCount();
         editor.putInt("nbPhones", nbPhones);
 
         for (int i=0; i<nbPhones; i++) {
-            TableRow r = (TableRow) table.getChildAt(i);
+            TableRow r = (TableRow) fragment.getTable().getChildAt(i);
             EditText t = (EditText) r.getChildAt(0);
             editor.putString("phone"+i, t.getText().toString());
         }
@@ -317,27 +285,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void addPhoneNumber (View v) {
 
-        EditText lEditText = new EditText(this);
-        lEditText.setInputType(TYPE_CLASS_PHONE);
-        lEditText.setHint("Phone Number");
-
-        Button removeButton = new Button(this);
-        removeButton.setText("X");
-
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ((ViewGroup)v.getParent().getParent()).removeView((ViewGroup)v.getParent());
-            }
-        });
-
-        TableRow newRow = new TableRow(this);
-        newRow.addView(lEditText);
-        newRow.addView(removeButton);
-        table.addView(newRow);
-
-    }
 
     public boolean callPhone (View v) {
         Intent intent = new Intent();
