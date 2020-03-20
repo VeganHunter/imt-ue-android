@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         int containerViewId = ((ViewGroup) view.getParent()).getId();
         if(savedInstanceState == null)
         {
+            Log.i("INPUTFRAGMENT", "INIT INPUT");
+
             inputFragment = new InputFragment();
             currentFragment = inputFragment;
             tx.add(containerViewId, currentFragment, "mainFragment");
@@ -63,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else{
+            Log.i("INPUTFRAGMENT", "INIT INPUT");
+
             currentFragment = fragmentMngr.getFragment(savedInstanceState, "CurrentFragment");
+            inputFragment = (InputFragment) fragmentMngr.getFragment(savedInstanceState, "InputFragment");
+            viewLastNameFragment = (ViewLastNameFragment) fragmentMngr.getFragment(savedInstanceState, "ViewLastNameFragment");
+
+
             tx.replace(containerViewId, currentFragment, "mainFragment");
 
 
@@ -403,6 +411,11 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         FragmentManager fragmentMngr = getSupportFragmentManager();
         fragmentMngr.putFragment(outState, "CurrentFragment", currentFragment);
+        fragmentMngr.putFragment(outState, "InputFragment", inputFragment);
+        if(viewLastNameFragment!=null)
+            fragmentMngr.putFragment(outState, "ViewLastNameFragment", viewLastNameFragment);
+
+
     }
 
     //GETTERS
