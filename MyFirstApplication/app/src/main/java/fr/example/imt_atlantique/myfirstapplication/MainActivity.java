@@ -52,30 +52,26 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "onCreate method");
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
-        View view = findViewById(R.id.constraintLayout2); // layout du main activity
+        View view = findViewById(R.id.constraintLayout2); // MainActivity layout
         int containerViewId = ((ViewGroup) view.getParent()).getId();
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null) { // If it's the first time the app is run
             inputFragment = new InputFragment();
             currentFragment = inputFragment;
-            tx.add(containerViewId, currentFragment, "mainFragment");
+            tx.add(containerViewId, currentFragment, "mainFragment"); // We display a brand new inputFragment
         }
 
-        else {
+        else { // Otherwise
             currentFragment = fragmentMngr.getFragment(savedInstanceState, "CurrentFragment");
-            /*
-            inputFragment = (InputFragment) fragmentMngr.getFragment(savedInstanceState, "InputFragment");
-            viewLastNameFragment = (ViewLastNameFragment) fragmentMngr.getFragment(savedInstanceState, "ViewLastNameFragment");
-            */
-
-            tx.replace(containerViewId, currentFragment, "mainFragment");
+            tx.replace(containerViewId, currentFragment, "mainFragment"); // We load a previously saved fragment
         }
 
         tx.commit();
 
     }
 
-    public void onFragmentInput() {
+    // Initializing the field attributes
+    public void initializeFieldAttributes() {
 
         firstNameField = findViewById(R.id.editTextfirstName);
         lastNameField = findViewById(R.id.editTextLastName);
@@ -115,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Log.i("Lifecycle", "onStop method");
 
-        if (currentFragment == inputFragment) {
+        if (currentFragment == inputFragment) { // Saving the data related to the inputFragment
 
             SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
@@ -413,11 +409,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         FragmentManager fragmentMngr = getSupportFragmentManager();
         fragmentMngr.putFragment(outState, "CurrentFragment", currentFragment);
-        /*
-        fragmentMngr.putFragment(outState, "InputFragment", inputFragment);
-        if (viewLastNameFragment!=null)
-            fragmentMngr.putFragment(outState, "ViewLastNameFragment", viewLastNameFragment);
-*/
     }
 
     // GETTERS

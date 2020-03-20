@@ -5,21 +5,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStructure;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.text.InputType.TYPE_CLASS_PHONE;
 
 
 /**
@@ -75,9 +68,11 @@ public class InputFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        ((MainActivity) getActivity()).onFragmentInput();
+        ((MainActivity) getActivity()).initializeFieldAttributes();
 
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
+
+        // Restoring the fields
 
         String savedPrenom = prefs.getString("firstName", "");
         ((MainActivity) getActivity()).getFirstNameField().setText(savedPrenom);
@@ -103,6 +98,7 @@ public class InputFragment extends Fragment {
             t.setText(phone);
         }
 
+        //
 
     }
 

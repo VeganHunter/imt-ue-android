@@ -1,5 +1,6 @@
 package fr.example.imt_atlantique.myfirstapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -73,7 +76,10 @@ public class ViewLastNameFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //lastNameTextView.setText(((MainActivity)getActivity()).getLastNameField().getText().toString());
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
+        lastname = prefs.getString("lastName", "");
+
         lastNameTextView.setText(lastname);
 
     }
