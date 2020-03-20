@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-    
+
     public boolean backToInput(View v) {
         viewLastNameFragment = new ViewLastNameFragment();
         FragmentManager fragmentMngr = getSupportFragmentManager();
