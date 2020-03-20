@@ -77,14 +77,10 @@ public class ViewLastNameFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        // Grabbing the last name from the input prefs and displaying it in the text view
         SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
-        lastname = prefs.getString("lastName", "");
-
-        lastNameTextView.setText(lastname);
+        lastNameTextView.setText(prefs.getString("lastName", ""));
 
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 }
