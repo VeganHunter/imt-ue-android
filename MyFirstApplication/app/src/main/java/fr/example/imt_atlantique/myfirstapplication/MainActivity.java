@@ -318,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
         tx.replace(containerViewId, inputFragment, "mainFragment");
+        tx.addToBackStack(null);
 
         tx.commit();
         return true;
@@ -333,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
         tx.replace(containerViewId, viewLastNameFragment, "mainFragment");
+        tx.addToBackStack(null);
         tx.commit();
 
         return true;
