@@ -54,28 +54,23 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2); // layout du main activity
         int containerViewId = ((ViewGroup) view.getParent()).getId();
-        if(savedInstanceState == null)
-        {
-            Log.i("INPUTFRAGMENT", "INIT INPUT");
 
+        if (savedInstanceState == null) {
             inputFragment = new InputFragment();
             currentFragment = inputFragment;
             tx.add(containerViewId, currentFragment, "mainFragment");
-
         }
 
-        else{
-            Log.i("INPUTFRAGMENT", "INIT INPUT");
-
+        else {
             currentFragment = fragmentMngr.getFragment(savedInstanceState, "CurrentFragment");
+            /*
             inputFragment = (InputFragment) fragmentMngr.getFragment(savedInstanceState, "InputFragment");
             viewLastNameFragment = (ViewLastNameFragment) fragmentMngr.getFragment(savedInstanceState, "ViewLastNameFragment");
-
+            */
 
             tx.replace(containerViewId, currentFragment, "mainFragment");
-
-
         }
+
         tx.commit();
 
     }
@@ -314,12 +309,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean backToInput(View v) {
+
+        // Creating a brand new inputFragment
+        inputFragment = new InputFragment();
+        currentFragment = inputFragment; // Updating the currentFragment variable - must always point to the current fragment
+
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
         tx.replace(containerViewId, inputFragment, "mainFragment");
-        currentFragment = inputFragment;
 
         tx.commit();
         return true;
@@ -411,14 +410,14 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         FragmentManager fragmentMngr = getSupportFragmentManager();
         fragmentMngr.putFragment(outState, "CurrentFragment", currentFragment);
+        /*
         fragmentMngr.putFragment(outState, "InputFragment", inputFragment);
-        if(viewLastNameFragment!=null)
+        if (viewLastNameFragment!=null)
             fragmentMngr.putFragment(outState, "ViewLastNameFragment", viewLastNameFragment);
-
-
+*/
     }
 
-    //GETTERS
+    // GETTERS
 
     public EditText getFirstNameField() {
         return firstNameField;
