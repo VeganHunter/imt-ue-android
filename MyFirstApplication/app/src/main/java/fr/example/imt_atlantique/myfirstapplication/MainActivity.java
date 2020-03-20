@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Log.i("Lifecycle", "onStop method");
 
-        if (currentFragment == inputFragment) { // Saving the data related to the inputFragment
+        if (currentFragment instanceof InputFragment) { // Saving the data related to the inputFragment
 
             SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
@@ -171,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
 
     public boolean wikipedia_search(MenuItem item) {
 
