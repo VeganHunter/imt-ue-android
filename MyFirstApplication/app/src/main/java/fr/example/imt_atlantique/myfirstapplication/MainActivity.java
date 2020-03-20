@@ -398,7 +398,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
@@ -407,6 +406,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //GETTERS
+
     public EditText getFirstNameField() {
         return firstNameField;
     }
