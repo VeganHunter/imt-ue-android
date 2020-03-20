@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
 
         editor.apply();
 
+        //putFragment(android.os.Bundle, "ActualFragment", );
+
     }
 
     @Override
@@ -292,7 +294,6 @@ public class MainActivity extends AppCompatActivity {
     }
     
     public boolean backToInput(View v) {
-        viewLastNameFragment = new ViewLastNameFragment();
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean viewLastName(View v) {
 
-        viewLastNameFragment = new ViewLastNameFragment();
+        viewLastNameFragment = new ViewLastNameFragment(lastNameField.getText().toString());
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);

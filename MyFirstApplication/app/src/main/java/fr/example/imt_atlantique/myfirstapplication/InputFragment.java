@@ -116,4 +116,9 @@ public class InputFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.i(" Fragment Lifecycle", "onDestroy method");
+    }
 }
