@@ -30,9 +30,8 @@ public class ViewLastNameFragment extends Fragment {
     private TextView lastNameTextView;
     private String lastname;
 
-    public ViewLastNameFragment(String lastname) {
+    public ViewLastNameFragment() {
         // Required empty public constructor
-        this.lastname = lastname;
     }
 
     /**
@@ -45,7 +44,7 @@ public class ViewLastNameFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ViewLastNameFragment newInstance(String param1, String param2) {
-        ViewLastNameFragment fragment = new ViewLastNameFragment("thomas");
+        ViewLastNameFragment fragment = new ViewLastNameFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,4 +78,7 @@ public class ViewLastNameFragment extends Fragment {
 
     }
 
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 }

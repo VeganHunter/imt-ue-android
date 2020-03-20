@@ -305,7 +305,8 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean viewLastName(View v) {
 
-        viewLastNameFragment = new ViewLastNameFragment(lastNameField.getText().toString());
+        viewLastNameFragment = new ViewLastNameFragment();
+        viewLastNameFragment.setLastname(lastNameField.getText().toString());
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
         View view = findViewById(R.id.constraintLayout2);
