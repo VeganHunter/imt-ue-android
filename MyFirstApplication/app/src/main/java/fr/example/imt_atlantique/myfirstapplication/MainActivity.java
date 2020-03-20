@@ -380,9 +380,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
+    
     //GETTERS
+
     public EditText getFirstNameField() {
         return firstNameField;
     }
