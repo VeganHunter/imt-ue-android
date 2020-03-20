@@ -115,35 +115,38 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Log.i("Lifecycle", "onStop method");
 
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        if (currentFragment == inputFragment) {
 
-        String prenom = firstNameField.getText().toString();
-        editor.putString("firstName", prenom);
+            SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
 
-        String nom = lastNameField.getText().toString();
-        editor.putString("lastName", nom);
+            String prenom = firstNameField.getText().toString();
+            editor.putString("firstName", prenom);
 
-        String birthdate = birthdateField.getText().toString();
-        editor.putString("birthdate", birthdate);
+            String nom = lastNameField.getText().toString();
+            editor.putString("lastName", nom);
 
-        String ville = cityField.getText().toString();
-        editor.putString("ville", ville);
+            String birthdate = birthdateField.getText().toString();
+            editor.putString("birthdate", birthdate);
 
-        int numdep = departmentField.getSelectedItemPosition();
-        editor.putInt("numDep", numdep);
+            String ville = cityField.getText().toString();
+            editor.putString("ville", ville);
 
-        int nbPhones = table.getChildCount();
-        editor.putInt("nbPhones", nbPhones);
+            int numdep = departmentField.getSelectedItemPosition();
+            editor.putInt("numDep", numdep);
 
-        for (int i=0; i<nbPhones; i++) {
-            TableRow r = (TableRow) table.getChildAt(i);
-            EditText t = (EditText) r.getChildAt(0);
-            editor.putString("phone"+i, t.getText().toString());
+            int nbPhones = table.getChildCount();
+            editor.putInt("nbPhones", nbPhones);
+
+            for (int i = 0; i < nbPhones; i++) {
+                TableRow r = (TableRow) table.getChildAt(i);
+                EditText t = (EditText) r.getChildAt(0);
+                editor.putString("phone" + i, t.getText().toString());
+            }
+
+            editor.apply();
+
         }
-
-        editor.apply();
-
 
     }
 
