@@ -2,6 +2,7 @@ package fr.example.imt_atlantique.myfirstapplication;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TableLayout table;
     private InputFragment inputFragment;
     private ViewLastNameFragment viewLastNameFragment;
+    private Fragment currentFragment;
 
     // LIFECYCLE
 
@@ -48,13 +50,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("Lifecycle", "onCreate method");
-
-        inputFragment = new InputFragment();
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
-        View view = findViewById(R.id.constraintLayout2);
+        View view = findViewById(R.id.constraintLayout2); // layout du main activity
         int containerViewId = ((ViewGroup) view.getParent()).getId();
-        tx.add(containerViewId, inputFragment, "mainFragment");
+        if(savedInstanceState == null)
+        {
+            inputFragment = new InputFragment();
+            currentFragment = inputFragment;
+            tx.add(containerViewId, currentFragment, "mainFragment");
+
+        }
+
+        else{
+            currentFragment = fragmentMngr.getFragment(savedInstanceState, "CurrentFragment");
+            tx.replace(containerViewId, currentFragment, "mainFragment");
+
+
+        }
         tx.commit();
 
     }
@@ -128,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
         editor.apply();
 
-        //putFragment(android.os.Bundle, "ActualFragment", );
 
     }
 
@@ -299,6 +311,8 @@ public class MainActivity extends AppCompatActivity {
         View view = findViewById(R.id.constraintLayout2);
         int containerViewId = ((ViewGroup) view.getParent()).getId();
         tx.replace(containerViewId, inputFragment, "mainFragment");
+        currentFragment = inputFragment;
+
         tx.commit();
         return true;
     }
@@ -306,6 +320,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean viewLastName(View v) {
 
         viewLastNameFragment = new ViewLastNameFragment();
+        currentFragment = viewLastNameFragment;
+
         viewLastNameFragment.setLastname(lastNameField.getText().toString());
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
@@ -382,6 +398,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        FragmentManager fragmentMngr = getSupportFragmentManager();
+        fragmentMngr.putFragment(outState, "CurrentFragment", currentFragment);
+    }
 
     //GETTERS
     public EditText getFirstNameField() {
