@@ -106,44 +106,47 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "onPause method");
     }
 
+    public void saveToPrefs() {
+
+        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        String prenom = firstNameField.getText().toString();
+        editor.putString("firstName", prenom);
+
+        String nom = lastNameField.getText().toString();
+        editor.putString("lastName", nom);
+
+        String birthdate = birthdateField.getText().toString();
+        editor.putString("birthdate", birthdate);
+
+        String ville = cityField.getText().toString();
+        editor.putString("ville", ville);
+
+        int numdep = departmentField.getSelectedItemPosition();
+        editor.putInt("numDep", numdep);
+
+        int nbPhones = table.getChildCount();
+        editor.putInt("nbPhones", nbPhones);
+
+        for (int i = 0; i < nbPhones; i++) {
+            TableRow r = (TableRow) table.getChildAt(i);
+            EditText t = (EditText) r.getChildAt(0);
+            editor.putString("phone" + i, t.getText().toString());
+        }
+
+        editor.apply();
+
+
+    }
+
     @Override
     protected void onStop(){
         super.onStop();
         Log.i("Lifecycle", "onStop method");
 
-        if (currentFragment instanceof InputFragment) { // Saving the data related to the inputFragment
-
-            SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-
-            String prenom = firstNameField.getText().toString();
-            editor.putString("firstName", prenom);
-
-            String nom = lastNameField.getText().toString();
-            editor.putString("lastName", nom);
-
-            String birthdate = birthdateField.getText().toString();
-            editor.putString("birthdate", birthdate);
-
-            String ville = cityField.getText().toString();
-            editor.putString("ville", ville);
-
-            int numdep = departmentField.getSelectedItemPosition();
-            editor.putInt("numDep", numdep);
-
-            int nbPhones = table.getChildCount();
-            editor.putInt("nbPhones", nbPhones);
-
-            for (int i = 0; i < nbPhones; i++) {
-                TableRow r = (TableRow) table.getChildAt(i);
-                EditText t = (EditText) r.getChildAt(0);
-                editor.putString("phone" + i, t.getText().toString());
-            }
-
-            editor.apply();
-
-        }
-
+        if (currentFragment instanceof InputFragment)  // Saving the data related to the inputFragment
+            saveToPrefs();
     }
 
     @Override
@@ -324,6 +327,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean viewLastName(View v) {
+
+        saveToPrefs();
 
         viewLastNameFragment = new ViewLastNameFragment();
         currentFragment = viewLastNameFragment;
