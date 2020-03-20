@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-    
+
     public boolean backToInput(View v) {
         FragmentManager fragmentMngr = getSupportFragmentManager();
         FragmentTransaction tx = fragmentMngr.beginTransaction();
