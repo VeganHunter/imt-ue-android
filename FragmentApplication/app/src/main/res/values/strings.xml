@@ -3,6 +3,5 @@
 
     <string name="hello_blank_fragment">Coucou Placeholder \o/</string>
     <string name="hello_display_fragment">Votre text sera ici</string>
-    <string name="hello_blank_fragment">Bienvenue ! Vous pouvez taper un texte.</string>
     <string name="dismiss">Vas-y va-t-en</string>
 </resources>
